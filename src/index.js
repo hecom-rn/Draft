@@ -24,12 +24,11 @@ function _initGlobal() {
 function _init() {
     return AsyncStorage.getKeys(_key())
         .then((result) => {
-            Object.values(result)
-                .forEach(item => {
-                    if (item) {
-                        rootNode[item.id] = item;
-                    }
-                });
+            result.forEach(item => {
+                if (item) {
+                    rootNode[item.id] = item;
+                }
+            });
         })
         .finally(() => LoginProcess.mark(ModuleName, true));
 }
@@ -39,9 +38,8 @@ function _uninit(forceClear) {
     if (forceClear) {
         return AsyncStorage.getKeys(_key())
             .then((result) => {
-                const promises = Object.values(result)
-                    .map(item => AsyncStorage.remove(_key(item.id)));
-                return Promise.all(promises);
+                const allKeys = result.map(item => _key(item.id));
+                return AsyncStorage.multiRemove(allKeys);
             });
     }
 }
