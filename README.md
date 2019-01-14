@@ -4,19 +4,7 @@
 
 这是新建业务数据时，保存和管理草稿的模块。单个草稿数据作为一条数据存入持久化存储中，这个存储库支持批量查询。
 
-## 安装
-
-```shell
-npm install --save @hecom/draft
-```
-
-## 使用方法
-
-```javascript
-import Draft from '@hecom/draft';
-```
-
-## 接口
+**接口**：
 
 * `name: string`：模块名称。
 * `initGlobal: () => Promise`：全局初始化模块。
